@@ -223,10 +223,12 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     app.setStyle('Fusion')
+    '''
+    Three style can choose: ['windowsvista', 'Windows', 'Fusion']
+    '''
 
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-
     MainWindow.show()
 
     # Welcome log

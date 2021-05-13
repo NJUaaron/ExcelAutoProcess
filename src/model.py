@@ -11,7 +11,7 @@ def findLocation(df, name):
                 if df.iloc[i][j] == name:
                     return (i, j)
         return None   # Didn't find
-        
+
 
 class SourceFile:
     def __init__(self):
@@ -72,6 +72,9 @@ class TargetFile:
 
         # Add .auto in front of .xls
         self.saveFilepath = re.sub('.xls', ".auto.xls", filepath) # Save file path
+        # Only output xlsx file, instead of xls file
+        if self.saveFilepath[-4:] == '.xls':
+            self.saveFilepath = self.saveFilepath + 'x'
 
         self.sheetNames = self.dfs.keys()
         return self.sheetNames
