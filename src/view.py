@@ -153,11 +153,11 @@ class Ui_MainWindow(object):
         horizontal splitter.
         '''
         if msgType == 1:
-            self.logBrowser.append( '[INFO] ' + msg )
+            self.logBrowser.append( '<strong style="color:#43ba1e;">[INFO]</strong> ' + msg )    # Green
         elif msgType == 2:
-            self.logBrowser.append( '[WARNING] ' + msg )
+            self.logBrowser.append( '<strong style="color:#aa7a19;">[WARNING]</strong> ' + msg )    # Yello
         else:
-            self.logBrowser.append( '[ERROR] ' + msg )
+            self.logBrowser.append( '<strong style="color:#da3211;">[ERROR]</strong> ' + msg )      # Red
     
     def browseButtonClicked(self, type):    # type = 1 or 2
         fileName = self.browseFile()
