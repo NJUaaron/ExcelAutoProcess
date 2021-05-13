@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model import Model
+import sys
+import os
 
 
 class Ui_MainWindow(object):
@@ -22,7 +24,14 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(524, 394)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("src\\../assets/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off) # window icon
+
+        # distribution
+        #iconPath = os.path.dirname(os.path.realpath(sys.executable)) + '/assets/icon.png'
+
+        # dev 
+        iconPath = 'src\\../assets/icon.png'
+
+        icon.addPixmap(QtGui.QPixmap(iconPath), QtGui.QIcon.Normal, QtGui.QIcon.Off) # window icon
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -211,13 +220,15 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
-    import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    app.setStyle('Fusion')
 
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
     MainWindow.show()
+
+    # Welcome log
+    ui.debugPrint(1, 'Welcome! This is auto Excel processor written by Aaron.')
     sys.exit(app.exec_())

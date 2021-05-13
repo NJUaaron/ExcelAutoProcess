@@ -8,7 +8,7 @@ pip install pyqt5
 ```
 Run `view.py` file
 ``` shell
-py view.py
+py src/view.py
 ```
 
 ## How to Use

@@ -3,10 +3,11 @@ import PyInstaller.__main__
 # Build Python program to .exe file
 PyInstaller.__main__.run([
     'src/view.py',
-    '--onefile',
+    '-F',
     '--windowed',
     '-p C:\Windows\System32\downlevel',
     '-n ExcelAutoProcess',
+    '--clean'
     #'-i assets/icon128.ico'    #icon can't work 
 ])
 
