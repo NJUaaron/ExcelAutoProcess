@@ -47,10 +47,17 @@ Now, sheet B is intact. (Notice that we still don't know Fred's phone number, be
 
 ## How to Run in Python Environment
 
+Make sure python 3 and following python packages are installed. (`xlwt` is used to output `.xls`file, now is deprecated)
 ``` shell
+$> pip install pandas
+$> pip install pyqt5
+$> pip install xlrd
+$> pip install xlwt
+$> pip install openpyxl
 ```
 Run `view.py` file.
 ``` shell
+$> py src/view.py
 ```
 
 
@@ -63,16 +70,43 @@ All the program runtime information will be presented in the text box at bottom.
 
 
 ## How to Build Distribution
+This section is about how to generate executable file from our python files. 
 
+If we want to narrow the generated `.exe` file size, building process must be done in virtual environment. Otherwise, `pyinstaller` will include other uncorrelated packages in building process.
+First, install python virtual environment tool `pipenv`.
 
 ``` shell
+$> pip install pipenv
+```
 
+Then, enter python virtual environment.
 
+``` shell
+$> pipenv shell
 ```
 
 Check if you have entered virtual environment successfully. You can see there are only three packages installed in virtual environment.
 
 ``` shell
+$> pip list
+Package    Version
+---------- -------
+pip        21.1.1
+setuptools 56.0.0
+wheel      0.36.2
+```
+
+Use `pip` to install essential packages listed in [How to Run in Python Environment](# How to Run in Python Environment) section.
+Run `setup.py`.  
+
+``` shell
+$> py setup.py
+```
+After processing, `view.exe` would be generated in `dist` folder.  
+At last, quit virtual environment.
+
+``` shell
+$> exit
 ```
 
 
@@ -82,5 +116,5 @@ Check if you have entered virtual environment successfully. You can see there ar
 The `.ui` file can be exported from Qt Designer.  
 Use following command to convert through `.ui` file into `view.js`
 ``` shell
-pyuic5 -x <filename>.ui -o view.py
+$> pyuic5 -x <filename>.ui -o view.py
 ```
