@@ -82,7 +82,7 @@ $> pip install pipenv
 Then, enter python virtual environment.
 
 ``` shell
-$> pipenv shell
+$> pipenv shellpyu
 ```
 
 Check if you have entered virtual environment successfully. You can see there are only three packages installed in virtual environment.
@@ -112,9 +112,10 @@ $> exit
 
 
 ## Other
-**Qt Designer** is a helpful tool to build GUI visually. 
+**Qt Designer** is a helpful tool to build GUI visually.  
+All the `.ui` files are palced in `ui` folder. You can open them with **Qt Designer**.
 The `.ui` file can be exported from Qt Designer.  
-Use following command to convert through `.ui` file into `view.js`
+Use following command to convert a `.ui` file into `.py` file.
 ``` shell
-$> pyuic5 -x <filename>.ui -o view.py
+$> pyuic5 -x ui/<filename>.ui -o <filename>.py
 ```

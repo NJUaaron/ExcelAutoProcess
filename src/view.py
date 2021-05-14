@@ -9,29 +9,45 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from lanDialog import LanDialog
+from aboutDialog import AboutDialog
 from model import Model
 import sys
 import os
 
+# ASSET PATH
+# distribution
+assetPath = os.path.dirname(os.path.realpath(sys.executable)) + '/assets/'
+
+# dev 
+#assetPath = 'src\\../assets/'
+
 
 class Ui_MainWindow(object):
     def __init__( self ):
-        #Initialize the super class
+        # Initialize the super class
         super().__init__()
         self.model = Model(self)
 
+        # About dialog initialization
+        self.aboutDialog = QtWidgets.QDialog()
+        self.ui2 = AboutDialog()
+        self.ui2.setupUi(self.aboutDialog, assetPath)
+
+        # Language select dialog initialization
+        self.lanDialog = QtWidgets.QDialog()
+        # IMPORTANT: ui3 have to be add self. Otherwise ui3 object will be recycled after __init__() 
+        # Then the radio button can't response to the click
+        self.ui3 = LanDialog(self, self.ui2)                 
+        self.ui3.setupUi(self.lanDialog, assetPath)
+        
+
     def setupUi(self, MainWindow):
+        self.MainWindow = MainWindow
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(524, 394)
         icon = QtGui.QIcon()
-
-        # distribution
-        #iconPath = os.path.dirname(os.path.realpath(sys.executable)) + '/assets/icon.png'
-
-        # dev 
-        iconPath = 'src\\../assets/icon.png'
-
-        icon.addPixmap(QtGui.QPixmap(iconPath), QtGui.QIcon.Normal, QtGui.QIcon.Off) # window icon
+        icon.addPixmap(QtGui.QPixmap(assetPath + 'icon.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off) # window icon
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -39,7 +55,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.inputLayout = QtWidgets.QVBoxLayout()
         self.inputLayout.setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
-        self.inputLayout.setContentsMargins(-1, 20, -1, 20)
+        self.inputLayout.setContentsMargins(-1, 10, -1, 20)
         self.inputLayout.setSpacing(20)
         self.inputLayout.setObjectName("inputLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -126,27 +142,59 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 524, 23))
         self.menubar.setObjectName("menubar")
+        self.menuPreference = QtWidgets.QMenu(self.menubar)
+        self.menuPreference.setObjectName("menuPreference")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionLanguage = QtWidgets.QAction(MainWindow)
+        self.actionLanguage.setObjectName("actionLanguage")
+        self.actionLanguage.triggered.connect(self.openLanDialog)    # bind trigger
+        self.actionClearLog = QtWidgets.QAction(MainWindow)
+        self.actionClearLog.setObjectName("actionClearLog")
+        self.actionClearLog.triggered.connect(self.clearLog)    # bind trigger
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
+        self.actionAbout.triggered.connect(self.openAboutDialog)    # bind trigger
+        self.menuPreference.addAction(self.actionLanguage)
+        self.menuPreference.addAction(self.actionClearLog)
+        self.menuPreference.addSeparator()
+        self.menuPreference.addAction(self.actionAbout)
+        self.menubar.addAction(self.menuPreference.menuAction())
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.sourceLabel.setText(_translate("MainWindow", "Source File"))
-        self.browseButton1.setText(_translate("MainWindow", "Browse"))
-        #self.sheetSelect1.setItemText(0, _translate("MainWindow", "All Sheet"))
-        #self.sheetSelect1.setItemText(1, _translate("MainWindow", "hello"))
-        self.targetLabel.setText(_translate("MainWindow", "Target File"))
-        self.browseButton2.setText(_translate("MainWindow", "Browse"))
-        self.headerNameLabel.setText(_translate("MainWindow", "Key Column Header Name"))
-        self.startButton.setText(_translate("MainWindow", "Start"))
-        self.logLabel.setText(_translate("MainWindow", "Log"))
-        MainWindow.setWindowTitle(_translate("MainWindow", "Auto Excel Processor")) # Window Title
+    def retranslateUi(self, lan):
+        if lan == 1:
+            self.MainWindow.setWindowTitle("Excel 自动处理工具")
+            self.MainWindow.setStatusTip("欢迎！")
+            self.sourceLabel.setText("源文件")
+            self.browseButton1.setText("浏览")
+            self.targetLabel.setText("目标文件")
+            self.browseButton2.setText("浏览")
+            self.headerNameLabel.setText("关键表头名")
+            self.startButton.setText("开始")
+            self.logLabel.setText("日志")
+            self.menuPreference.setTitle("设置")
+            self.actionLanguage.setText("语言")
+            self.actionClearLog.setText("清空日志")
+            self.actionAbout.setText("关于")
+        else:
+            self.MainWindow.setWindowTitle("Excel Auto Processor")
+            self.MainWindow.setStatusTip("Welcome!")
+            self.sourceLabel.setText("Source File")
+            self.browseButton1.setText("Browse")
+            self.targetLabel.setText("Target File")
+            self.browseButton2.setText("Browse")
+            self.headerNameLabel.setText("Key Column Header Name")
+            self.startButton.setText("Start")
+            self.logLabel.setText("Log")
+            self.menuPreference.setTitle("Setting")
+            self.actionLanguage.setText("Language")
+            self.actionClearLog.setText("Clear Log")
+            self.actionAbout.setText("About")
 
     def debugPrint( self, msgType, msg ):   #1:info  #2: warning  #3: error
         '''Print the message in the text edit at the bottom of the
@@ -158,6 +206,17 @@ class Ui_MainWindow(object):
             self.logBrowser.append( '<strong style="color:#aa7a19;">[WARNING]</strong> ' + msg )    # Yello
         else:
             self.logBrowser.append( '<strong style="color:#da3211;">[ERROR]</strong> ' + msg )      # Red
+    
+    def clearLog(self):
+        # Clear log information in log browser
+        self.logBrowser.clear()
+    
+    def openLanDialog(self):
+        self.lanDialog.show()
+    
+    def openAboutDialog(self):
+        self.aboutDialog.show()
+
     
     def browseButtonClicked(self, type):    # type = 1 or 2
         fileName = self.browseFile()
@@ -221,16 +280,14 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
     app.setStyle('Fusion')
     '''
     Three style can choose: ['windowsvista', 'Windows', 'Fusion']
     '''
 
+    MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
 
-    # Welcome log
-    ui.debugPrint(1, 'Welcome! This is auto Excel processor written by Aaron.')
     sys.exit(app.exec_())
