@@ -72,7 +72,7 @@ All the program runtime information will be presented in the text box at bottom.
 ## How to Build Distribution
 This section is about how to generate executable file from our python files. 
 
-If we want to narrow the generated `.exe` file size, building process must be done in virtual environment. Otherwise, `pyinstaller` will include other uncorrelated packages in building process.
+If we want to narrow the generated `.exe` file size, building process must be done in virtual environment. Otherwise, `pyinstaller` will include other uncorrelated packages in building process.  
 First, install python virtual environment tool `pipenv`.
 
 ``` shell
@@ -82,7 +82,7 @@ $> pip install pipenv
 Then, enter python virtual environment.
 
 ``` shell
-$> pipenv shellpyu
+$> pipenv shell
 ```
 
 Check if you have entered virtual environment successfully. You can see there are only three packages installed in virtual environment.
@@ -97,7 +97,7 @@ wheel      0.36.2
 ```
 
 Use `pip` to install essential packages listed in [How to Run in Python Environment](# How to Run in Python Environment) section.
-Run `setup.py`.  
+Run `setup.py` to build.  
 
 ``` shell
 $> py setup.py
