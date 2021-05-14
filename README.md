@@ -25,7 +25,7 @@ And this is sheet B. As you can see below, sheet B is not intact. It misses info
 
 Open the program, you can see the user interface like this. 
 
-![](assets\GUI.png)
+![image](assets/GUI.png)
 
 1. First, select sheet A as source file, and select sheet B as target file. 
 2. Type in key column header name. In this case, we type in 'Name'.
@@ -33,7 +33,7 @@ Open the program, you can see the user interface like this.
 
 Besides, if there are multiple sheets in one excel file, you can decide which sheet to manipulate, or can select **All sheets** option.
 
-![](assets\sheetSelect.png)
+![image](assets/sheetSelect.png)
 
 Now, sheet B is intact. (Notice that we still don't know Fred's phone number, because Fred's information doesn't exist in sheet A)
 
