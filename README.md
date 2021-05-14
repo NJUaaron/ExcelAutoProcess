@@ -47,17 +47,10 @@ Now, sheet B is intact. (Notice that we still don't know Fred's phone number, be
 
 ## How to Run in Python Environment
 
-First, install python 3 and necessary python package. (`xlwt` is used to output `.xls`file, now is deprecated)
 ``` shell
-pip install pandas
-pip install pyqt5
-pip install xlrd
-pip install xlwt
-pip install openpyxl
 ```
 Run `view.py` file.
 ``` shell
-py src/view.py
 ```
 
 
@@ -70,26 +63,17 @@ All the program runtime information will be presented in the text box at bottom.
 
 
 ## How to Build Distribution
-This is about how to generate executable file from our python files.
 
-First, enter python virtual environment.
 
 ``` shell
-# This will generate a new folder called <env_name>
-python -m venv <env_name>   
 
-# Activate venv
-.\<env_name>\Scripts\Activate.ps1
 
-# Quit venv
-.\<env_name>\Scripts\deactivate.bat
 ```
 
-Run `setup.py` in venv.
+Check if you have entered virtual environment successfully. You can see there are only three packages installed in virtual environment.
+
 ``` shell
-py setup.py
 ```
-After processing, `view.exe` would be generated in `dist` folder.
 
 
 
