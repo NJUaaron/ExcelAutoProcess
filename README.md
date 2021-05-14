@@ -35,7 +35,7 @@ Besides, if there are multiple sheets in one excel file, you can decide which sh
 
 ![image](assets/sheetSelect.png)
 
-Now, sheet B is intact. (Notice that we still don't know Fred's phone number, because Fred's information doesn't exist in sheet A)
+Now, we get an intact sheet B. Congratulation!! 🎉🎉   
 
 | Name  | Job               | Phone        |
 | ----- | ----------------- | ------------ |
@@ -43,6 +43,7 @@ Now, sheet B is intact. (Notice that we still don't know Fred's phone number, be
 | John  | doctor            | 153-96524678 |
 | Fred  | lawyer            |              |
 
+(Notice that we still don't know Fred's phone number, because Fred's information doesn't exist in sheet A)
 
 
 ## How to Run in Python Environment
