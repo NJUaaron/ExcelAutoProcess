@@ -36,8 +36,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Excel Auto Processor v-0.1
+        tag_name: 0.4
+        release_name: Excel Auto Processor v0.4
         body_path: CHANGELOG.md
         draft: false
         prerelease: false
