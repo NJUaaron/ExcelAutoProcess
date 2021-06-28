@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas pyqt5 xlrd xlwt openpyxl
+        pip install pandas pyqt5 xlrd xlwt openpyxl pyinstaller
     - name: Build distribution
       run: |
         py setup.py
